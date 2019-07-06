@@ -8,6 +8,20 @@
 
 namespace psychedelic::network
 {
+	constexpr int defaultLibrgEvents[] = {
+		LIBRG_CONNECTION_ACCEPT,
+		LIBRG_CONNECTION_REQUEST,
+		LIBRG_CONNECTION_DISCONNECT,
+
+		LIBRG_CLIENT_STREAMER_UPDATE,
+		LIBRG_CLIENT_STREAMER_ADD,
+		LIBRG_CLIENT_STREAMER_REMOVE,
+
+		LIBRG_ENTITY_UPDATE,
+		LIBRG_ENTITY_CREATE,
+		LIBRG_ENTITY_REMOVE
+	};
+
 	class SharedInterface
 	{
 	public:
@@ -52,7 +66,10 @@ namespace psychedelic::network
 		librg_ctx* GetContext() { assert(mNetworkContext != nullptr); return mNetworkContext; }
 	protected:
 		librg_ctx* mNetworkContext;
+		void RegisterDefaultEvents();
 		static void OnAllMessages(librg_message* msg);
+		static void OnAllEvents(librg_event* evnt);
+
 		std::unordered_map<u32, std::function<void(const Event&)>> mEvents;
 		std::unordered_map<u32, std::function<void(const Message&)>> mRegisteredMessages;
 	};

@@ -18,7 +18,6 @@ namespace psychedelic::network
 	void SharedInterface::EachEntity(std::function<void(const Entity&)> lambda, i32 entityType)
 	{
 		assert(mNetworkContext != nullptr);
-
 		if (lambda != nullptr)
 		{
 			for (u32 i = 0; i < mNetworkContext->max_entities; i++)
@@ -163,14 +162,37 @@ namespace psychedelic::network
 		librg_data_free(&data);
 	}
 
+	void SharedInterface::RegisterDefaultEvents()
+	{
+		assert(mNetworkContext != nullptr);
+
+		for (const auto eventId : defaultLibrgEvents)
+			librg_event_add(mNetworkContext, eventId, OnAllEvents);
+	}
+
 	void SharedInterface::OnAllMessages(librg_message* msg)
 	{
-		assert(msg != nullptr);
-		auto serverInstance = reinterpret_cast<SharedInterface*>(msg->ctx->user_data);
-		if (serverInstance->GetRegisteredMsg()[static_cast<unsigned int>(msg->type)] != nullptr)
+		assert(msg != nullptr && msg->ctx->user_data != nullptr);
+		auto sharedInterfaceInstance = reinterpret_cast<SharedInterface*>(msg->ctx->user_data);
+		auto registeredMessage = sharedInterfaceInstance->GetRegisteredMsg()[static_cast<unsigned int>(msg->type)];
+
+		if (registeredMessage != nullptr)
 		{
 			Message wrappedMessage(msg);
-			serverInstance->GetRegisteredMsg()[static_cast<unsigned int>(msg->type)](wrappedMessage);
+			registeredMessage(wrappedMessage);
+		}
+	}
+
+	void SharedInterface::OnAllEvents(librg_event* evnt)
+	{
+		assert(evnt != nullptr && evnt->ctx->user_data != nullptr);
+		auto sharedInterfaceInstance = reinterpret_cast<SharedInterface*>(evnt->ctx->user_data);
+		auto desiredEvent = sharedInterfaceInstance->GetEvents()[static_cast<unsigned int>(evnt->type)];
+		
+		if (desiredEvent != nullptr)
+		{
+			Event wrappedEvent(evnt);
+			desiredEvent(wrappedEvent);
 		}
 	}
 

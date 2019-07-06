@@ -9,20 +9,26 @@ namespace psychedelic::network
 	class Event
 	{
 	public:
-		Event(librg_event* event) : mEvent(event) {}
-		~Event() {}
-	
+		Event(librg_event* event) : mEvent(event)
+		{
+			assert(event != nullptr);
+		}
+		
+		~Event() 
+		{
+		}
+
 		template<typename T> 
 		T* GetUserData()
 		{
-			assert(mEvent != nullptr && mEvent->ctx != nullptr && mEvent->ctx->user_data != nullptr);
+			assert(mEvent->ctx != nullptr && mEvent->ctx->user_data != nullptr);
 			return reinterpret_cast<T*>(mEvent->ctx->user_data);
 		}
 		
 		Entity GetEntity();
 		DataStream GetStream();
-		Peer GetPeer();
-		void Reject();
+		Peer GetPeer() { return mEvent->peer; }
+		void Reject() { librg_event_reject(mEvent); }
 	private:
 		librg_event* mEvent;
 	};

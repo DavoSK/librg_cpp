@@ -15,5 +15,6 @@ namespace psychedelic::network
 	public:
 		void Init(const ClientConfig& clientConfig);
 		void Connect(const std::string& serverIp, int serverPort);
+		bool IsConnected() const;
 	};
 };

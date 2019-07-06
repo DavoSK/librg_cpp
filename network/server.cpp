@@ -12,25 +12,7 @@ namespace psychedelic::network
 		mNetworkContext->user_data		 = reinterpret_cast<void*>(this);
 		
 		librg_init(mNetworkContext);
-
-		#define EVENT_ADD(X) librg_event_add(mNetworkContext, X, [](librg_event * evnt) { \
-			Event wrappedEvent(evnt); \
-			auto serverInstance = reinterpret_cast<Server*>(evnt->ctx->user_data); \
-			if (serverInstance && serverInstance->GetEvents()[X]) \
-				serverInstance->GetEvents()[X](wrappedEvent); \
-		});
-
-		EVENT_ADD(LIBRG_CONNECTION_ACCEPT);
-		EVENT_ADD(LIBRG_CONNECTION_REQUEST);
-		EVENT_ADD(LIBRG_CONNECTION_DISCONNECT);
-		
-		EVENT_ADD(LIBRG_CLIENT_STREAMER_UPDATE);
-		EVENT_ADD(LIBRG_CLIENT_STREAMER_ADD);
-		EVENT_ADD(LIBRG_CLIENT_STREAMER_REMOVE);
-
-		EVENT_ADD(LIBRG_ENTITY_UPDATE);
-		EVENT_ADD(LIBRG_ENTITY_CREATE);
-		EVENT_ADD(LIBRG_ENTITY_REMOVE);
+		RegisterDefaultEvents();
 	}
 
 	void Server::Start(const std::string& serverIp, int serverPort)
