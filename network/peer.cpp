@@ -1,4 +1,5 @@
 #include "peer.h"
+#include <assert.h>
 
 namespace psychedelic::network
 {

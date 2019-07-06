@@ -1,6 +1,5 @@
 #pragma once
 #include "librg/librg.h"
-#include "entity.h"
 
 namespace psychedelic::network
 {
@@ -8,11 +7,17 @@ namespace psychedelic::network
 	{
 	public:
 		Peer(librg_peer* librgPeer) : 
-			mLibrgPeer(librgPeer) {}
-		~Peer() {}
+			mLibrgPeer(librgPeer) 
+		{
+		}
 
-		librg_peer* GetLibrgPeer() { return mLibrgPeer; }
+		~Peer() 
+		{
+		}
+
 		void SetDefaultTimeout(u32 minLimit, u32 maxLimit);
+		librg_peer* GetLibrgPeer() { return mLibrgPeer; };
+		
 	private:
 		librg_peer* mLibrgPeer;
 	};

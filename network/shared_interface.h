@@ -49,6 +49,7 @@ namespace psychedelic::network
 		void OnEntityRemove(std::function<void(const Event&)> onEntityRemove);
 
 		u32 GetMaxEntities();
+		librg_ctx* GetContext() { assert(mNetworkContext != nullptr); return mNetworkContext; }
 	protected:
 		librg_ctx* mNetworkContext;
 		static void OnAllMessages(librg_message* msg);

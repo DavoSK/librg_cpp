@@ -1,7 +1,3 @@
-#ifndef LIBRG_IMPLEMENTATION
-	#define LIBRG_IMPLEMENTATION
-#endif
-
 #include "client.h"
 
 namespace psychedelic::network

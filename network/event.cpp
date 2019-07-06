@@ -1,5 +1,6 @@
 #include <assert.h>
 #include "event.h"
+#include "shared_interface.h"
 
 namespace psychedelic::network
 {
@@ -23,7 +24,8 @@ namespace psychedelic::network
 
 	Entity Event::GetEntity()
 	{
-		assert(mEvent != nullptr && mEvent->entity != nullptr);
-		return { mEvent->entity };
+		assert(mEvent != nullptr && mEvent->entity != nullptr && mEvent->ctx != nullptr);
+		auto sharedInterface = reinterpret_cast<SharedInterface*>(mEvent->ctx);
+		return { sharedInterface->GetContext(), mEvent->entity };
 	}
 }

@@ -6,7 +6,6 @@
 
 namespace psychedelic::network
 {
-	class Server;
 	class Event
 	{
 	public:

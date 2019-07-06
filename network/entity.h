@@ -1,7 +1,7 @@
 #pragma once
+#include <assert.h>
 #include "librg/librg.h"
 #include "peer.h"
-#include <assert.h>
 
 namespace psychedelic::network
 {
@@ -12,10 +12,11 @@ namespace psychedelic::network
 			mLibrgContext(librgContext),
 			mLibrgEntity(librgEntity) 
 		{
-
 		}
 
-		~Entity() {}
+		~Entity() 
+		{
+		}
 		
 		u32 GetID();
 		u32 GetType();

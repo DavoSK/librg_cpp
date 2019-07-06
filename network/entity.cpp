@@ -1,5 +1,4 @@
 #include "entity.h"
-#include <assert.h>
 
 namespace psychedelic::network
 {
@@ -64,7 +63,6 @@ namespace psychedelic::network
 
 		//NOTE(DavoSK): You can do SetControll only on serverside
 		assert(mLibrgContext->mode == LIBRG_MODE_SERVER);
-
 		librg_entity_control_set(mLibrgContext, mLibrgEntity->id, librgPeer);
 	}
 
@@ -74,9 +72,7 @@ namespace psychedelic::network
 
 		//NOTE(DavoSK): You can do RemoveControl only on serverside
 		assert(mLibrgContext->mode == LIBRG_MODE_SERVER);
-
 		librg_entity_control_remove(mLibrgContext, mLibrgEntity->id);
-
 	}
 
 	Peer Entity::GetControl()
