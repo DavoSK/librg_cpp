@@ -12,24 +12,26 @@ namespace psychedelic::network
 			mLibrgContext(librgContext),
 			mLibrgEntity(librgEntity) 
 		{
+			assert(mLibrgEntity != nullptr && mLibrgContext != nullptr);
 		}
 
 		~Entity() 
 		{
 		}
-		
-		u32 GetID();
-		u32 GetType();
-		void SetType(u32 type);
 
-		u64 GetFlags();
-		void SetFlags(u64 flags);
+		u32 GetID()								{ return mLibrgEntity->id; }
 
-		zpl_vec3 GetPosition();
-		void SetPosition(zpl_vec3 position);
-		
-		f32 GetStreamRange();
-		void SetStreamRange(f32 streamRange);
+		u32 GetType()							{ return mLibrgEntity->type; }
+		void SetType(u32 type)					{ mLibrgEntity->type = type; }
+
+		u64 GetFlags()							{ return mLibrgEntity->flags; }
+		void SetFlags(u64 flags)				{ mLibrgEntity->flags = flags; }
+
+		zpl_vec3 GetPosition()					{ return mLibrgEntity->position; }
+		void SetPosition(zpl_vec3 position)		{ mLibrgEntity->position = position; }
+
+		f32 GetStreamRange()					{ return mLibrgEntity->stream_range; }
+		void SetStreamRange(f32 streamRange)	{ mLibrgEntity->stream_range = streamRange; }
 
 		void SetControl(Peer controllPeer);
 		void RemoveControl();

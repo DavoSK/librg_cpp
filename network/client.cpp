@@ -34,7 +34,6 @@ namespace psychedelic::network
 
 	void Client::Connect(const std::string& serverIp, int serverPort)
 	{	
-		assert(mNetworkContext != nullptr);
 		librg_address addr = { serverPort, const_cast<char*>(serverIp.c_str())};
 		librg_network_start(mNetworkContext, addr);
 	}
