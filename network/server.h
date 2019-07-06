@@ -15,7 +15,6 @@ namespace psychedelic::network
 	{
 	public:
 		void Init(const ServerConfig& serverConfig);
-		
 		void SetDefaultClientType(u32 clientType);
 		void SetDefaultStreamRange(u32 streamRange);
 		u64 GetMaxConnections();

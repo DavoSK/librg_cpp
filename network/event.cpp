@@ -21,12 +21,6 @@ namespace psychedelic::network
 		librg_event_reject(mEvent);
 	}
 
-	Server* Event::GetServer()
-	{
-		assert(mEvent != nullptr && mEvent->ctx != nullptr && mEvent->ctx->user_data != nullptr);
-		return reinterpret_cast<Server*>(mEvent->ctx->user_data);
-	}
-
 	Entity Event::GetEntity()
 	{
 		assert(mEvent != nullptr && mEvent->entity != nullptr);
