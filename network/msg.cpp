@@ -1,7 +1,7 @@
 #include "msg.h"
 #include <assert.h>
 
-namespace psychedelic::network
+namespace network
 {
 	DataStream Message::GetStream()
 	{

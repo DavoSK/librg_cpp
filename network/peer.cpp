@@ -1,7 +1,7 @@
 #include "peer.h"
 #include <assert.h>
 
-namespace psychedelic::network
+namespace network
 {
 	void Peer::SetDefaultTimeout(u32 minLimit, u32 maxLimit)
 	{

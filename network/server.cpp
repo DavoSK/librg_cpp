@@ -1,6 +1,6 @@
 #include "server.h"
 
-namespace psychedelic::network
+namespace network
 {
 	void Server::Init(const ServerConfig& serverConfig)
 	{
@@ -48,5 +48,20 @@ namespace psychedelic::network
 	{
 		assert(mNetworkContext != nullptr);
 		return mNetworkContext->max_connections;
+	}
+	
+	u32 Server::GetTotalRecivedData()
+	{
+		auto networkHost = mNetworkContext->network.host;
+		assert(networkHost != nullptr);
+		return networkHost->totalReceivedData;
+	}
+
+	u32 Server::GetTotalSentData()
+	{
+		mNetworkContext->network.connected_peers;
+		auto networkHost = mNetworkContext->network.host;
+		assert(networkHost != nullptr);
+		return networkHost->totalSentData;
 	}
 };

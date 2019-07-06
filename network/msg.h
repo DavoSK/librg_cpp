@@ -3,7 +3,7 @@
 #include "datastream.h"
 #include "peer.h"
 
-namespace psychedelic::network
+namespace network
 {
 	class Message
 	{

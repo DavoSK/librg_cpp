@@ -3,7 +3,7 @@
 #include "librg/librg.h"
 #include "peer.h"
 
-namespace psychedelic::network
+namespace network
 {
 	class Entity
 	{

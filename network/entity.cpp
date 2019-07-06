@@ -1,6 +1,6 @@
 #include "entity.h"
 
-namespace psychedelic::network
+namespace network
 {
 	void Entity::SetControl(Peer controllPeer)
 	{
@@ -28,7 +28,6 @@ namespace psychedelic::network
 		//NOTE(DavoSK): You can do RemoveControl only on serverside
 		//meybe later also on client ?
 		assert(mLibrgContext->mode == LIBRG_MODE_SERVER);
-
 		return { librg_entity_control_get(mLibrgContext, mLibrgEntity->id) };
 	}
 }

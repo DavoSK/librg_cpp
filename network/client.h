@@ -1,7 +1,7 @@
 #pragma once
 #include "shared_interface.h"
 
-namespace psychedelic::network
+namespace network
 {
 	struct ClientConfig
 	{

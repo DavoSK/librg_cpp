@@ -4,7 +4,7 @@
 #include "entity.h"
 #include "peer.h"
 
-namespace psychedelic::network
+namespace network
 {
 	class Event
 	{

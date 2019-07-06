@@ -2,7 +2,7 @@
 #include "event.h"
 #include "shared_interface.h"
 
-namespace psychedelic::network
+namespace network
 {
 	DataStream Event::GetStream()
 	{

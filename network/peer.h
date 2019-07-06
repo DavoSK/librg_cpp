@@ -1,7 +1,7 @@
 #pragma once
 #include "librg/librg.h"
 
-namespace psychedelic::network
+namespace network
 {
 	class Peer
 	{
@@ -16,6 +16,7 @@ namespace psychedelic::network
 		}
 
 		void SetDefaultTimeout(u32 minLimit, u32 maxLimit);
+		u32 GetPing() { return mLibrgPeer->roundTripTime; };
 		librg_peer* GetLibrgPeer() { return mLibrgPeer; };
 		
 	private:

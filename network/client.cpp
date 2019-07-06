@@ -1,6 +1,6 @@
 #include "client.h"
 
-namespace psychedelic::network
+namespace network
 {
 	void Client::Init(const ClientConfig& clientConfig)
 	{

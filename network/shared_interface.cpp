@@ -1,6 +1,6 @@
 #include "shared_interface.h"
 
-namespace psychedelic::network
+namespace network
 {
 	Entity SharedInterface::FindEntity(Peer entityPeer)
 	{

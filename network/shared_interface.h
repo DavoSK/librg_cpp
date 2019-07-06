@@ -6,7 +6,7 @@
 #include "event.h"
 #include <functional>
 
-namespace psychedelic::network
+namespace network
 {
 	constexpr int defaultLibrgEvents[] = 
 	{
