@@ -5,19 +5,17 @@ namespace psychedelic::network
 	Entity SharedInterface::FindEntity(Peer entityPeer)
 	{
 		auto librgPeer = entityPeer.GetLibrgPeer();
-		assert(mNetworkContext != nullptr && librgPeer != nullptr);
+		assert(librgPeer != nullptr);
 		return { mNetworkContext, librg_entity_find(mNetworkContext, librgPeer) };
 	}
 
 	Entity SharedInterface::FetchEntity(u32 entityId)
 	{
-		assert(mNetworkContext != nullptr);
 		return { mNetworkContext, librg_entity_fetch(mNetworkContext, entityId) };
 	}
 
 	void SharedInterface::EachEntity(std::function<void(const Entity&)> lambda, i32 entityType)
 	{
-		assert(mNetworkContext != nullptr);
 		if (lambda != nullptr)
 		{
 			for (u32 i = 0; i < mNetworkContext->max_entities; i++)
@@ -37,14 +35,12 @@ namespace psychedelic::network
 
 	void SharedInterface::Stop()
 	{
-		assert(mNetworkContext != nullptr);
 		librg_network_stop(mNetworkContext);
 		librg_free(mNetworkContext);
 	}
 
 	void SharedInterface::Tick()
 	{
-		assert(mNetworkContext != nullptr);
 		librg_tick(mNetworkContext);
 	}
 
@@ -52,7 +48,6 @@ namespace psychedelic::network
 	{
 		if (message != nullptr)
 		{
-			assert(mNetworkContext != nullptr);
 			librg_network_add(mNetworkContext, messageId, OnAllMessages);
 			mRegisteredMessages[messageId] = message;
 		}
@@ -115,7 +110,7 @@ namespace psychedelic::network
 	void SharedInterface::SendMessageTo(u32 messageId, Peer destinationPeer, std::function<void(DataStream& stream)> lambdaStream)
 	{
 		auto librgPeer = destinationPeer.GetLibrgPeer();
-		assert(mNetworkContext != nullptr && librgPeer != nullptr);
+		assert(librgPeer != nullptr);
 
 		librg_data data;
 		librg_data_init(&data);
@@ -131,8 +126,6 @@ namespace psychedelic::network
 
 	void SharedInterface::BroadcastMessage(u32 messageId, std::function<void(DataStream& stream)> lambdaStream)
 	{
-		assert(mNetworkContext != nullptr);
-
 		librg_data data;
 		librg_data_init(&data);
 		if (lambdaStream)
@@ -148,7 +141,7 @@ namespace psychedelic::network
 	void SharedInterface::BroadcastMessageExcept(u32 messageId, Peer exceptPeer, std::function<void(DataStream& stream)> lambdaStream)
 	{
 		auto librgPeer = exceptPeer.GetLibrgPeer();
-		assert(mNetworkContext != nullptr && librgPeer != nullptr);
+		assert(librgPeer != nullptr);
 
 		librg_data data;
 		librg_data_init(&data);
@@ -164,8 +157,6 @@ namespace psychedelic::network
 
 	void SharedInterface::RegisterDefaultEvents()
 	{
-		assert(mNetworkContext != nullptr);
-
 		for (const auto eventId : defaultLibrgEvents)
 			librg_event_add(mNetworkContext, eventId, OnAllEvents);
 	}
@@ -198,7 +189,6 @@ namespace psychedelic::network
 
 	u32 SharedInterface::GetMaxEntities()
 	{
-		assert(mNetworkContext != nullptr);
 		return mNetworkContext->max_entities;
 	}
 }

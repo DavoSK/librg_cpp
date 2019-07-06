@@ -8,7 +8,8 @@
 
 namespace psychedelic::network
 {
-	constexpr int defaultLibrgEvents[] = {
+	constexpr int defaultLibrgEvents[] = 
+	{
 		LIBRG_CONNECTION_ACCEPT,
 		LIBRG_CONNECTION_REQUEST,
 		LIBRG_CONNECTION_DISCONNECT,
@@ -27,6 +28,7 @@ namespace psychedelic::network
 	public:
 		SharedInterface() : mNetworkContext(new librg_ctx)
 		{
+			assert(mNetworkContext != nullptr);
 			zpl_zero_item(mNetworkContext);
 		}
 
